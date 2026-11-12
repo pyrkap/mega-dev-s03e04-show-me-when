@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>sched-prod · incidents</title>
-    <meta name="build" content="c19228af771e5227d042c408a7c363031f7a30ec" />
+    <meta name="build" content="229ac70812187cf5265054f45a74029d243f9082" />
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="app.js"></script>
   </head>
@@ -18,8 +18,11 @@
       <p data-testid="error" role="alert" hidden></p>
       <p data-testid="empty" hidden>No incidents tonight.</p>
       <p data-testid="updated" class="sub"></p>
+      <div class="arrivals" aria-live="polite">
+        <button type="button" data-testid="new-bar" hidden>0 new — show incidents</button>
+      </div>
       <ul data-testid="incident-list" class="list" aria-label="Incidents, newest first" hidden></ul>
     </main>
-    <footer>sched-prod incident board · build <code data-testid="build-sha">c19228af771e5227d042c408a7c363031f7a30ec</code></footer>
+    <footer>sched-prod incident board · build <code data-testid="build-sha">229ac70812187cf5265054f45a74029d243f9082</code></footer>
   </body>
 </html>
