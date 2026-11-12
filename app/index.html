@@ -18,6 +18,9 @@
       <p data-testid="error" role="alert" hidden></p>
       <p data-testid="empty" hidden>No incidents tonight.</p>
       <p data-testid="updated" class="sub"></p>
+      <div class="arrivals" aria-live="polite">
+        <button type="button" data-testid="new-bar" hidden>0 new — show incidents</button>
+      </div>
       <ul data-testid="incident-list" class="list" aria-label="Incidents, newest first" hidden></ul>
     </main>
     <footer>sched-prod incident board · build <code data-testid="build-sha">development</code></footer>

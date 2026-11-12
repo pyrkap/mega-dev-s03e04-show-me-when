@@ -42,6 +42,11 @@ try {
     assert.match(await page.locator('time').first().innerText(), /12\/11\/2026/);
     assert.match(await page.locator('time').first().innerText(), new RegExp(expectedTime));
     assert.equal(await page.locator('time').first().getAttribute('datetime'), original.openedAt);
+    await page.getByTestId('new-bar').waitFor();
+    assert.match(await page.getByTestId('new-bar').innerText(), /1 new/);
+    assert.equal(await page.getByTestId('incident-row').first().getAttribute('data-id'), original.id);
+    assert.equal(await page.locator(`[data-id="${arrival.id}"]`).count(), 0, 'arrival is queued until explicit merge');
+    await page.getByTestId('new-bar').click();
     await page.getByTestId('incident-row').filter({ hasText: arrival.id }).waitFor();
     assert.equal(await page.getByTestId('incident-row').first().getAttribute('data-id'), arrival.id);
     assert.equal(await page.locator('img').count(), 0, 'API text must not become HTML');
@@ -56,7 +61,7 @@ try {
     assert.equal(await row.getByTestId('ack').isDisabled(), true);
     await page.waitForTimeout(2100);
     assert.equal(await row.getByTestId('acked').count(), 1, 'ack survives refresh');
-    results.push({ locale, timezoneId, calls, checks: ['loader', 'local-time', 'UTC-attribute', 'live-newest-first', 'safe-text', 'ack-error-retry', 'id-and-cursor', 'ack-survives-refresh'] });
+    results.push({ locale, timezoneId, calls, checks: ['loader', 'local-time', 'UTC-attribute', 'queued-arrival', 'explicit-merge-newest-first', 'safe-text', 'ack-error-retry', 'id-and-cursor', 'ack-survives-refresh'] });
     await context.close();
   }
 

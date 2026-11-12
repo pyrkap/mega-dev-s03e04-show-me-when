@@ -6,9 +6,26 @@ const loader = document.querySelector('[data-testid="loader"]');
 const empty = document.querySelector('[data-testid="empty"]');
 const error = document.querySelector('[data-testid="error"]');
 const updated = document.querySelector('[data-testid="updated"]');
+const newBar = document.querySelector('[data-testid="new-bar"]');
 const rows = new Map();
 const acknowledged = new Map();
 const pending = new Set();
+const visibleIncidents = new Map();
+let latestIncidents = [];
+let initialized = false;
+
+function updateNewBar() {
+  const count = latestIncidents.filter((incident) => !visibleIncidents.has(incident.id)).length;
+  newBar.textContent = `${count} new — show incidents`;
+  newBar.hidden = count === 0;
+}
+
+newBar.addEventListener('click', () => {
+  // Only this explicit action may merge/reorder the visible snapshot.
+  for (const incident of latestIncidents) visibleIncidents.set(incident.id, incident);
+  render([...visibleIncidents.values()]);
+  updateNewBar();
+});
 
 function makeRow(incident) {
   const row = document.createElement('li');
@@ -100,7 +117,13 @@ async function refresh() {
   refreshing = true;
   try {
     const page = await fetchIncidents();
-    render(page.incidents);
+    latestIncidents = page.incidents;
+    if (!initialized) {
+      for (const incident of latestIncidents) visibleIncidents.set(incident.id, incident);
+      render([...visibleIncidents.values()]);
+      initialized = true;
+    }
+    updateNewBar();
     loader.hidden = true;
     list.hidden = false;
     updated.textContent = `Updated ${formatLocalTime(page.updatedAt)}`;

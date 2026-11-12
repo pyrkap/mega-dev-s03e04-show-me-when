@@ -17,6 +17,8 @@ button:focus-visible { outline: 3px solid #005fcc; outline-offset: 2px; }
 [data-testid="acked"] { color: #13652b; font-weight: 600; }
 [data-testid="error"] { color: #b00020; }
 [data-testid="updated"] { margin-bottom: 12px; }
+.arrivals { height: 48px; }
+[data-testid="new-bar"] { color: #003f86; border: 1px solid #005fcc; border-radius: 4px; background: #eef5ff; }
 @media (max-width: 760px) {
   header, main, footer { padding: 12px; }
   .row { grid-template-columns: 1fr auto; padding: 12px; }
