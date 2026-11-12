@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>sched-prod · incidents</title>
+    <meta name="build" content="c19228af771e5227d042c408a7c363031f7a30ec" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>incidents</h1>
+      <p class="sub">sched-prod · tonight</p>
+    </header>
+    <main data-testid="board">
+      <p data-testid="loader" role="status">Loading incidents…</p>
+      <p data-testid="error" role="alert" hidden></p>
+      <p data-testid="empty" hidden>No incidents tonight.</p>
+      <p data-testid="updated" class="sub"></p>
+      <ul data-testid="incident-list" class="list" aria-label="Incidents, newest first" hidden></ul>
+    </main>
+    <footer>sched-prod incident board · build <code data-testid="build-sha">c19228af771e5227d042c408a7c363031f7a30ec</code></footer>
+  </body>
+</html>
